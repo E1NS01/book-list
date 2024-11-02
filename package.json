@@ -2,9 +2,10 @@
   "name": "book-list",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
+    "dev": "docker compose up",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
@@ -15,9 +16,13 @@
   "engines": {
     "node": ">=18"
   },
+  "dependencies": {},
   "packageManager": "yarn@1.22.22",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  }
 }
