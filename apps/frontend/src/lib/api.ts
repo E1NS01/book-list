@@ -13,7 +13,7 @@ async function getAllBooks() {
       throw new APIError(
         "Failed to fetch books",
         response.status,
-        await response.json().catch(() => null)
+        await response.json().catch(() => null),
       );
     }
     const data = await response.json();
