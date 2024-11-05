@@ -32,7 +32,9 @@ cd book-list
 yarn install
 ```
 
-3. Start the development environment:
+## Development Environment
+
+To start the development environment:
 
 ```bash
 yarn dev
@@ -40,9 +42,24 @@ yarn dev
 
 This will:
 
-- Start PostgreSQL in a Docker container
-- Start the backend service in a Docker container (accessible on port 3000)
-- Start the frontend service in a Docker container (accessible on port 1234)
+- Start PostgreSQL in a Docker container with development configuration
+- Start the backend service in development mode with hot-reload (port 3000)
+- Start the frontend service in development mode with hot-reload (port 1234)
+- Mount directories as volumes for live updates
+
+## Production Environment
+
+To start the production environment:
+´´´bash
+yarn start
+´´´
+
+This will:
+
+- Start PostgreSQL in a Docker container with production configuration
+- Build and start the backend service in production mode (port 3000)
+- Build and start the frontend service in production mode (port 1234)
+- Use production-specific environment variables and optimizations
 
 ## Development
 

@@ -1,5 +1,11 @@
 import { APIError } from "./errors";
 
+/**
+ * TODO
+ *
+ * Replace hardcoded BACKEND_URL with and environment variable for configurability
+ * (left out to make the code more shareable for the interview)
+ */
 const BACKEND_URL = "http://localhost:3000/";
 
 async function getAllBooks() {
@@ -13,7 +19,7 @@ async function getAllBooks() {
       throw new APIError(
         "Failed to fetch books",
         response.status,
-        await response.json().catch(() => null),
+        await response.json().catch(() => null)
       );
     }
     const data = await response.json();
