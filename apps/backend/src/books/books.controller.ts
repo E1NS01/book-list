@@ -16,17 +16,20 @@ import { UpdateBookDto } from 'src/dto/update-book.dto';
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
+
   @Get()
   @ApiResponse({ status: 200, description: 'Returns all books.' })
   async getAllBooks() {
     return await this.booksService.getAll();
   }
+
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Retrieve a book by ID.' })
   @ApiResponse({ status: 404, description: 'Book not found.' })
   async getBookByID(@Param('id') id: number) {
     return await this.booksService.getBookByID(id);
   }
+
   @Post()
   @ApiResponse({ status: 201, description: 'Create a new book.' })
   @ApiBody({
