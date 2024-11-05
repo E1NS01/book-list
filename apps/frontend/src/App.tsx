@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
-import { Book, columns } from "@/components/Booklist/columns";
+import { columns } from "@/components/Booklist/columns";
 import { DataTable } from "@/components/Booklist/DataTable";
-import { getAllBooks } from "@/lib/api";
+import { Toaster } from "./components/ui/toaster";
+import { Loader2 } from "lucide-react";
+import { useBooks } from "@/hooks/use-books";
 
 function App() {
-  const [books, setBooks] = useState<Book[]>([]);
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const data = await getAllBooks();
-      console.log(data);
-      setBooks(data);
-    };
-
-    fetchBooks();
-
-    const interval = setInterval(() => {
-      fetchBooks();
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const { books, isLoading } = useBooks({
+    onError: (error) => {
+      console.error("Failed to fetch books:", error);
+    },
+  });
 
   return (
-    <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={books} />
-    </div>
+    <main>
+      <div className="container mx-auto py-10">
+        {isLoading && books.length === 0 ? (
+          <div className="flex justify-center items-center h-32">
+            <Loader2 className="h-8 w-8 animate-spin" />
+          </div>
+        ) : (
+          <DataTable columns={columns} data={books} />
+        )}
+      </div>
+      <Toaster />
+    </main>
   );
 }
 
