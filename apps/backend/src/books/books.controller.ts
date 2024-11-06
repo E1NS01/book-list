@@ -6,11 +6,21 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateBookDto } from 'src/dto/create-book.dto';
-import { UpdateBookDto } from 'src/dto/update-book.dto';
+import { CreateBookDto } from '../dto/create-book.dto';
+import { UpdateBookDto } from '../dto/update-book.dto';
+
+/**
+ * TODO:
+ * Caching
+ * Rate Limiting
+ * Authorization (role based for a possible admin panel manage books)
+ * Input sanitization for edge cases etc
+ */
 
 @ApiTags('Books')
 @Controller('books')
@@ -31,6 +41,7 @@ export class BooksController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe({ transform: true }))
   @ApiResponse({ status: 201, description: 'Create a new book.' })
   @ApiBody({
     type: CreateBookDto,
@@ -41,6 +52,7 @@ export class BooksController {
   }
 
   @Put(':id')
+  @UsePipes(new ValidationPipe({ transform: true }))
   @ApiResponse({ status: 200, description: 'Update a book.' })
   @ApiResponse({ status: 404, description: 'Book not found.' })
   @ApiBody({

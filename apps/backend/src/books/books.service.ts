@@ -1,10 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Book } from '@prisma/client';
 
-import { CreateBookDto } from 'src/dto/create-book.dto';
-import { UpdateBookDto } from 'src/dto/update-book.dto';
-import { ErrorHandlingService } from 'src/error-handling/error-handling.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateBookDto } from '../dto/create-book.dto';
+import { UpdateBookDto } from '../dto/update-book.dto';
+import { ErrorHandlingService } from '../error-handling/error-handling.service';
+import { PrismaService } from '../prisma/prisma.service';
+
+/**
+ * TODO
+ * Better error handling with custom Errors
+ *
+ */
 
 @Injectable()
 export class BooksService {
@@ -32,6 +38,9 @@ export class BooksService {
       }
       return book;
     } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
       this.errorHandler.handleDatabaseError(
         error,
         `fetching book with id ${id}`,
@@ -62,12 +71,12 @@ export class BooksService {
           throw new NotFoundException(`Book with id ${id} not found`);
         }
 
-        await transaction.book.update({
+        const updatedBook = await transaction.book.update({
           where: { id },
           data: { title: bookData.title },
         });
 
-        return book;
+        return updatedBook;
       });
     } catch (error) {
       if (error instanceof NotFoundException) {
@@ -80,7 +89,10 @@ export class BooksService {
       );
     }
   }
-
+  /**
+   * TODO: Maybe implement soft delete over hard delete
+   * Would require schema changes (addition of deletedAt?)
+   */
   async deleteBook(id: number): Promise<{ message: string }> {
     try {
       return await this.prisma.$transaction(async (transaction) => {
