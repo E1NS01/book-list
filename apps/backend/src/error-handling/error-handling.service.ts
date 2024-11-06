@@ -27,6 +27,9 @@ export class ErrorHandlingService {
     if (error instanceof HttpException) {
       throw error;
     }
+    /* if (error instanceof NotFoundException) {
+      throw error;
+    } */
 
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
