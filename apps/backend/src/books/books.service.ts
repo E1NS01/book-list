@@ -40,9 +40,6 @@ export class BooksService {
       }
       return book;
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
       this.errorHandler.handleDatabaseError(
         error,
         `fetching book with id ${id}`,
@@ -81,10 +78,6 @@ export class BooksService {
         return updatedBook;
       });
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-
       this.errorHandler.handleDatabaseError(
         error,
         `updating book with id ${id}`,
@@ -107,10 +100,6 @@ export class BooksService {
         return { message: 'book successfully deleted' };
       });
     } catch (error) {
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-
       this.errorHandler.handleDatabaseError(
         error,
         `deleting book with id ${id}`,

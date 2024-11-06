@@ -20,6 +20,7 @@ import { UpdateBookDto } from '../dto/update-book.dto';
  * Rate Limiting
  * Authorization (role based for a possible admin panel manage books) for POST/PUT/DELETE
  * Input sanitization for edge cases etc
+ * Add Metadata to response
  * Pagination for getAllBooks
  * Sorting and Filtering
  * I also think error handling and logging could be improved
