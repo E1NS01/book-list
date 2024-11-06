@@ -49,12 +49,20 @@ export function useBooks({
 
       const newInterval = Math.min(refreshInterval * 2, maxInterval);
       setRefreshInterval(newInterval);
-
-      toast({
-        title: "Error fetching books",
-        description: `Connection failed. Retrying in ${Math.round(newInterval / 1000)} seconds`,
-        duration: newInterval,
-      });
+      console.log(err.message);
+      if (err.message.includes("Network Error")) {
+        toast({
+          title: "Server unavailable",
+          description: `Unable to connect to the server. Retrying in ${newInterval} seconds.`,
+          duration: newInterval,
+        });
+      } else {
+        toast({
+          title: "Error fetching books",
+          description: `Connection failed. Retrying in ${Math.round(newInterval / 1000)} seconds`,
+          duration: newInterval,
+        });
+      }
     } finally {
       setIsLoading(false);
     }
