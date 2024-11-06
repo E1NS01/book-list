@@ -53,7 +53,7 @@ export function useBooks({
       if (err.message.includes("Network Error")) {
         toast({
           title: "Server unavailable",
-          description: `Unable to connect to the server. Retrying in ${newInterval} seconds.`,
+          description: `Unable to connect to the server. Retrying in ${newInterval / 1000} seconds.`,
           duration: newInterval,
         });
       } else {

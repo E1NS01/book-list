@@ -7,7 +7,7 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "start": "docker compose -f docker-compose.yaml up --build -d"
+    "start": "docker compose -f docker-compose.dev.yaml up --build -d"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
