@@ -50,9 +50,10 @@ This will:
 ## Production Environment
 
 To start the production environment:
-´´´bash
+
+```bash
 yarn start
-´´´
+```
 
 This will:
 
@@ -60,6 +61,22 @@ This will:
 - Build and start the backend service in production mode (port 3000)
 - Build and start the frontend service in production mode (port 1234)
 - Use production-specific environment variables and optimizations
+
+## Testing
+
+**NOTE:** Testing is only available for the backend, but it can be run from the monorepo.
+
+To run the tests for the entire monorepo, use the following command:
+
+```bash
+yarn test
+```
+
+**NOTE:** Test coverage is only available for the backend. To run the backend tests with coverage, use:
+
+```bash
+yarn workspace backend test:cov
+```
 
 ## Development
 

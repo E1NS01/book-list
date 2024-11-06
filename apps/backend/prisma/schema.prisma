@@ -13,6 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Update Books with more data
+// e.g. author, relase date, publisher, ISBN number,
+// createdAt, lastModifiedAt, deletedAt(if soft delete)
+
+
 model Book {
   id    Int     @default(autoincrement()) @id
   title String
