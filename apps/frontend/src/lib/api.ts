@@ -28,7 +28,7 @@ async function getAllBooks() {
     if (error instanceof APIError) {
       throw error;
     }
-    throw new APIError("Network error occurred", undefined, error);
+    throw new APIError("Network Error occurred", undefined, error);
   }
 }
 

@@ -9,6 +9,8 @@ import { PrismaService } from '../prisma/prisma.service';
 /**
  * TODO
  * Better error handling with custom Errors
+ * Custom Exception
+ * Soft Delete maybe? Would require schema changes
  *
  */
 
@@ -89,10 +91,7 @@ export class BooksService {
       );
     }
   }
-  /**
-   * TODO: Maybe implement soft delete over hard delete
-   * Would require schema changes (addition of deletedAt?)
-   */
+
   async deleteBook(id: number): Promise<{ message: string }> {
     try {
       return await this.prisma.$transaction(async (transaction) => {

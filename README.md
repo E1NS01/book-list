@@ -114,5 +114,5 @@ The project includes Docker configuration for both frontend and backend services
 To run the entire application using docker:
 
 ```bash
-docker compose up
+yarn start
 ```

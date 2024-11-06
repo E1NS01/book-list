@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BooksService } from './books.service';
-import { PrismaService } from '../prisma/prisma.service';
-import { ErrorHandlingService } from '../error-handling/error-handling.service';
+import { BooksService } from '../books.service';
+import { PrismaService } from '../../prisma/prisma.service';
+import { ErrorHandlingService } from '../../error-handling/error-handling.service';
 import { NotFoundException } from '@nestjs/common';
 
 /**
